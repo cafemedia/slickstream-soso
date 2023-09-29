@@ -19,10 +19,10 @@ export class SosoDialogView extends LitElement {
       box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
     }
     #toolbar {
-      padding: 16px;
+      padding: 27px;
       text-transform: capitalize;
       text-align: var(--soso-dialog-title-align, left);
-      background: white;
+      background: var(--soso-dialog-title-bg, var(--slick-discovery-highlight-color, #2196f3));
       color: var(--soso-dialog-title-color, white);
       border-bottom: var(--soso-dialog-title-border, none);
       letter-spacing: 0.8px;
@@ -30,10 +30,10 @@ export class SosoDialogView extends LitElement {
       display: var(--soso-dialog-title-display, block);
     }
     #content {
-      padding: var(--soso-dialog-content-padding, 16px);
+      padding: 16px 16px 0px;
     }
     #footer {
-      padding: 16px;
+      padding: 0px 16px 16px;
       text-align: var(--soso-dialog-footer-align, right);
       background: var(--soso-dialog-footer-bg, none);
       border-top: var(--soso-dialog-footer-border, none);
