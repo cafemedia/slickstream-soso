@@ -1,4 +1,4 @@
-import { LitElement, html, TemplateResult, css, CSSResultGroup } from 'lit';
+import { LitElement, html, TemplateResult, css, CSSResultGroup, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { flex } from '../styles/flex';
 import { element } from '../registry';
@@ -11,6 +11,7 @@ export class SosoTextInput extends LitElement {
   @property({ type: Boolean }) minimal = false;
   @property({ type: String }) autocomplete = '';
   @property() placeholder = '';
+  @property({ type: Array }) minMaxStep: [number?, number?, number?] = [undefined, undefined, undefined];
 
   @query('#container') private container?: HTMLDivElement;
   @query('input') input?: HTMLInputElement;
@@ -179,9 +180,10 @@ export class SosoTextInput extends LitElement {
 
   render(): TemplateResult {
     const midOverlayClass = (this.label || '').trim() ? '' : 'empty';
+    const [ min, max, step ] = this.minMaxStep;
     return html`
     <div id="container" class="${this.minimal ? 'minimal' : ''}">
-      <input type="${this.type}" ?disabled="${this.disabled}" autocomplete="${this.autocomplete}" placeholder="${this.placeholder}" @focus="${this.onFocus}" @blur="${this.onBlur}" @input="${this.onInput}">
+      <input type="${this.type}" min="${min ?? nothing}" max="${max ?? nothing}" step="${step ?? nothing}" ?disabled="${this.disabled}" autocomplete="${this.autocomplete}" placeholder="${this.placeholder}" @focus="${this.onFocus}" @blur="${this.onBlur}" @input="${this.onInput}">
       <div id="overlay" class="horizontal layout">
         <div id="leftOverlay"></div>
         <div id="midOverlay" class="${midOverlayClass}">
@@ -211,8 +213,25 @@ export class SosoTextInput extends LitElement {
     }
   }
 
+  private checkNumericalBounds(value: string) {
+    if (this.minMaxStep) {
+      const [min, max] = this.minMaxStep;
+      if (min !== undefined && parseFloat(value) < min) {
+        return min.toString();
+      }
+      if (max !== undefined && parseFloat(value) > max) {
+        return max.toString();
+      }
+    }
+    return value;
+  }
+
   private onInput() {
     const text = this.input!.value;
+
+    if (this.type === 'number') {
+      this.input!.value = this.checkNumericalBounds(text);
+    }
     if (text) {
       this.container!.classList.add('notched');
     } else {
