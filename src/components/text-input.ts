@@ -11,7 +11,7 @@ export class SosoTextInput extends LitElement {
   @property({ type: Boolean }) minimal = false;
   @property({ type: String }) autocomplete = '';
   @property() placeholder = '';
-  @property({ type: Array }) minMaxStep: [number?, number?, number?] = [undefined, undefined, undefined];
+  @property({ type: Array }) minMaxStep?: [number, number, number] = undefined;
 
   @query('#container') private container?: HTMLDivElement;
   @query('input') input?: HTMLInputElement;
