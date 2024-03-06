@@ -180,7 +180,7 @@ export class SosoTextInput extends LitElement {
 
   render(): TemplateResult {
     const midOverlayClass = (this.label || '').trim() ? '' : 'empty';
-    const [ min, max, step ] = this.minMaxStep;
+    const [ min, max, step ] = this.minMaxStep ?? [];
     return html`
     <div id="container" class="${this.minimal ? 'minimal' : ''}">
       <input type="${this.type}" min="${min ?? nothing}" max="${max ?? nothing}" step="${step ?? nothing}" ?disabled="${this.disabled}" autocomplete="${this.autocomplete}" placeholder="${this.placeholder}" @focus="${this.onFocus}" @blur="${this.onBlur}" @input="${this.onInput}">
