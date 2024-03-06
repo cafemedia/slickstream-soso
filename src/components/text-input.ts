@@ -12,6 +12,7 @@ export class SosoTextInput extends LitElement {
   @property({ type: String }) autocomplete = '';
   @property() placeholder = '';
   @property({ type: Array }) minMaxStep?: [number, number, number] = undefined;
+  @property() maxlength = '';
 
   @query('#container') private container?: HTMLDivElement;
   @query('input') input?: HTMLInputElement;
@@ -183,7 +184,7 @@ export class SosoTextInput extends LitElement {
     const [ min, max, step ] = this.minMaxStep ?? [];
     return html`
     <div id="container" class="${this.minimal ? 'minimal' : ''}">
-      <input type="${this.type}" min="${min ?? nothing}" max="${max ?? nothing}" step="${step ?? nothing}" ?disabled="${this.disabled}" autocomplete="${this.autocomplete}" placeholder="${this.placeholder}" @focus="${this.onFocus}" @blur="${this.onBlur}" @input="${this.onInput}">
+      <input type="${this.type}" min="${min ?? nothing}" max="${max ?? nothing}" step="${step ?? nothing}" ?disabled="${this.disabled}" autocomplete="${this.autocomplete}" placeholder="${this.placeholder}" maxlength="${this.maxlength}" @focus="${this.onFocus}" @blur="${this.onBlur}" @input="${this.onInput}">
       <div id="overlay" class="horizontal layout">
         <div id="leftOverlay"></div>
         <div id="midOverlay" class="${midOverlayClass}">
