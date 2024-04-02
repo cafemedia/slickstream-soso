@@ -26,8 +26,8 @@ export class SosoIcon extends LitElement {
         vertical-align: middle;
         fill: currentColor;
         stroke: none;
-        width: 24px;
-        height: 24px;
+        width: var(--soso-icon-size, 24px);
+        height: var(--soso-icon-size, 24px);
         box-sizing: initial;
       }
       svg {
