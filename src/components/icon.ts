@@ -8,6 +8,7 @@ import { element } from '../registry';
 export class SosoIcon extends LitElement {
   @property({ type: String }) icon?: string;
   @property({ type: String }) iconkey?: string;
+  @property({ type: String }) fillRule?: string;
   @property() customSvg?: string;
 
   static get styles(): CSSResultGroup {
@@ -48,7 +49,7 @@ export class SosoIcon extends LitElement {
     return html`
     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
       <g>
-        <path d="${path}"></path>
+        <path d="${path}" fill-rule="${this.fillRule}" \></path>
       </g>
     </svg>
     `;
